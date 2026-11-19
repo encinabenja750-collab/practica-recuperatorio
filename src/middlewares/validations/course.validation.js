@@ -104,10 +104,10 @@ export const createCourseValidation = [
         if (!mongoose.isValidObjectId(topicId)) {
           throw new Error(`El ID ${topicId} no es válido`);
         }
-      }
-      const topic = await Topic.findById(topicId);
-      if (!topic) {
-        throw new Error(`El tópico con el ID ${topicId} no existe`);
+        const topic = await Topic.findById(topicId);
+        if (!topic) {
+          throw new Error(`El tópico con el ID ${topicId} no existe`);
+        }
       }
       return true;
     }),
@@ -201,10 +201,10 @@ export const updateCourseValidation = [
         if (!mongoose.isValidObjectId(topicId)) {
           throw new Error(`El ID ${topicId} no es válido`);
         }
-      }
-      const topic = await Topic.findById(topicId);
-      if (!topic) {
-        throw new Error(`El tópico con el ID ${topicId} no existe`);
+        const topic = await Topic.findById(topicId);
+        if (!topic) {
+          throw new Error(`El tópico con el ID ${topicId} no existe`);
+        }
       }
       return true;
     }),

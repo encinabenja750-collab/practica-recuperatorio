@@ -47,7 +47,9 @@ export const getById = async (req, res) => {
     let course = null;
 
     // TODO 3: consultar el curso por id con populate del teacher (traer solo su username) y de los topics. Guardar el resultado en course.
-
+    course = await Course.findById(id)
+      .populate("teacher", "username")
+      .populate("topics");
     if (!course) {
       return res
         .status(404)
@@ -71,6 +73,11 @@ export const update = async (req, res) => {
     let course = null;
 
     // TODO 4: actualizar el curso: buscarlo por id, asignar los datos validados (data) a sus campos, incluidos los topics, guardarlo con save() y devolver el curso actualizado. Guardar el resultado en course.
+    course = await Course.findById(id);
+    if (course) {
+      Object.assign(course, data);
+    }
+    await course.save();
 
     if (!course) {
       return res
@@ -95,7 +102,7 @@ export const remove = async (req, res) => {
     let course = null;
 
     // TODO 5: eliminar físicamente el curso por id. Guardar el resultado en course.
-
+    course = await Course.findByIdAndDelete(id);
     if (!course) {
       return res
         .status(404)

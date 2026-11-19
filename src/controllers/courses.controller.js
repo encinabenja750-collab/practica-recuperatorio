@@ -10,7 +10,7 @@ export const create = async (req, res) => {
     let course;
 
     // TODO 1: crear el curso con los datos validados (data), que incluyen el teacher y los topics. Guardar el resultado en course.
-
+    course = await Course.create(data);
     return res
       .status(201)
       .json({ message: "Curso creado correctamente", data: course });
@@ -27,7 +27,9 @@ export const getAll = async (req, res) => {
     let courses;
 
     // TODO 2: consultar todos los cursos con populate del teacher (traer solo su username) y de los topics. Guardar el resultado en courses.
-
+    courses = await Course.find()
+      .populate("teacher", "username")
+      .populate("topics");
     return res
       .status(200)
       .json({ message: "Cursos obtenidos correctamente", data: courses });
@@ -93,7 +95,7 @@ export const remove = async (req, res) => {
     let course = null;
 
     // TODO 5: eliminar físicamente el curso por id. Guardar el resultado en course.
-    
+
     if (!course) {
       return res
         .status(404)
